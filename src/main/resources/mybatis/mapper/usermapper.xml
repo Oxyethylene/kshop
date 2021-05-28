@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oxy.kshop.mapper.UserRepository">
-    <resultMap type="oxy.kshop.entity.User" id="UserResult">
-        <result property="id" column="id"/>
+    <resultMap type="oxy.kshop.model.entity.UserDO" id="UserResult">
+        <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="password" column="password"/>
         <result property="email" column="email"/>
@@ -12,13 +12,19 @@
         <result property="modifiedDate" column="gmt_modified" />
     </resultMap>
 
-    <insert id="oxy.kshop.mapper.UserRepository.save" parameterType="oxy.kshop.entity.User">
+    <sql id="Base_Column_List" >
+        id, name, password, email, gmt_create, gmt_modified
+    </sql>
+
+    <insert id="oxy.kshop.mapper.UserRepository.save" parameterType="oxy.kshop.model.entity.UserDO">
         insert into kshop_user(name, password, email, gmt_create, gmt_modified)
         values (#{name}, #{password}, #{email}, #{createDate}, #{modifiedDate})
     </insert>
 
-    <select id="oxy.kshop.mapper.UserRepository.find" resultMap="UserResult" parameterType="Map">
-        SELECT id, name, password, email, gmt_create, gmt_modified FROM kshop_user
+    <select id="oxy.kshop.mapper.UserRepository.findUserByMap" resultMap="UserResult" parameterType="Map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM kshop_user
         <where>
             <if test="name!=null and name!='' ">
                 AND name LIKE #{name}
@@ -30,5 +36,11 @@
                 AND id = #{id}
             </if>
         </where> 
+    </select>
+    
+    <select id="oxy.kshop.mapper.UserRepository.findUserByEmail" resultMap="UserResult" parameterType="java.lang.String">
+        SELECT <include refid="Base_Column_List" />
+        FROM kshop_user
+        WHERE email = #{email}
     </select>
 </mapper>
