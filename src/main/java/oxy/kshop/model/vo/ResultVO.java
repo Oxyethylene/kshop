@@ -50,10 +50,6 @@ public class ResultVO<T> {
 
     @Override
     public String toString() {
-        return "ResultVO{" +
-                "code=" + code +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
+        return String.format("{\"code\": %d, \"message\": \"%s\", \"data\": \"%s\"", code, message, data.toString());
     }
 }
