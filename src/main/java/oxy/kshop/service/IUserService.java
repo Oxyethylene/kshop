@@ -1,7 +1,8 @@
 package oxy.kshop.service;
 
-import oxy.kshop.model.entity.UserDO;
+import oxy.kshop.model.param.LoginParam;
+import oxy.kshop.model.vo.UserVO;
 
 public interface IUserService {
-    UserDO login(UserDO userDO);
+    UserVO login(LoginParam loginParam);
 }

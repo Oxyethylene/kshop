@@ -1,17 +1,11 @@
 package oxy.kshop.model.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 
 /**
  * @author kudlife
  */
-public class UserDO implements UserDetails {
+public class UserDO {
     private Long id;
     private String name;
     private String password;
@@ -19,34 +13,15 @@ public class UserDO implements UserDetails {
     private Date createDate;
     private Date modifiedDate;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
-    }
+    public UserDO(){}
 
-    @Override
-    public String getUsername() {
-        return getName();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public UserDO(Long id, String name, String password, String email, Date createDate, Date modifiedDate) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.createDate = createDate;
+        this.modifiedDate = modifiedDate;
     }
 
     public Long getId() {
@@ -65,7 +40,6 @@ public class UserDO implements UserDetails {
         this.name = name;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
@@ -100,7 +74,7 @@ public class UserDO implements UserDetails {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserDO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +

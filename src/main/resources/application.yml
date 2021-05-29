@@ -3,10 +3,16 @@ spring:
     username: mzl
     password: mzlnb
     url: jdbc:mysql://123.57.239.38:3306/kshop
+
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: oxy.kshop.entity
+
 logging:
   level:
     oxy.kshop.controller: debug
     oxy.kshop.mapper: info
+
+security:
+  jwt:
+    secretKey: kudlfie
