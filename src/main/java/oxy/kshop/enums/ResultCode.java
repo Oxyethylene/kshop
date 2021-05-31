@@ -16,6 +16,8 @@ public enum ResultCode {
 
     FAILED(1004, "接口异常"),
 
+    UNSUPPORTED_METHOD(5001, "方法不支持"),
+
     ERROR(5000, "未知错误");
 
     private int code;

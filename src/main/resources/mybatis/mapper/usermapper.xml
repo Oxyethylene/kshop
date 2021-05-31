@@ -13,11 +13,11 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, name, password, email, gmt_create, gmt_modified
+        id, `name`, password, email, gmt_create, gmt_modified
     </sql>
 
     <insert id="oxy.kshop.mapper.UserRepository.save" parameterType="oxy.kshop.model.entity.UserDO">
-        insert into kshop_user(name, password, email, gmt_create, gmt_modified)
+        insert into kshop_user(`name`, password, email, gmt_create, gmt_modified)
         values (#{name}, #{password}, #{email}, #{createDate}, #{modifiedDate})
     </insert>
 
@@ -27,7 +27,7 @@
         FROM kshop_user
         <where>
             <if test="name!=null and name!='' ">
-                AND name LIKE #{name}
+                AND `name` LIKE #{name}
             </if>
             <if test="email!=null and email!='' ">
                 AND email = #{email}

@@ -12,16 +12,18 @@ import oxy.kshop.model.vo.UserVO;
 import oxy.kshop.service.IUserService;
 import oxy.kshop.service.impl.UserServiceImpl;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/user")
 public class LoginController {
-    private static final Logger log = LoggerFactory.getLogger(LoggerFactory.class);
+    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     IUserService userService;
 
     @PostMapping("/login")
-    public UserVO login(@RequestBody @Validated LoginParam loginParam) {
+    public UserVO login(@RequestBody @Valid LoginParam loginParam) {
         return userService.login(loginParam);
     }
 

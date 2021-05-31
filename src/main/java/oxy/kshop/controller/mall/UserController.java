@@ -3,14 +3,15 @@ package oxy.kshop.controller.mall;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import oxy.kshop.model.entity.UserDO;
 import oxy.kshop.mapper.UserRepository;
 import oxy.kshop.model.param.LoginParam;
+import oxy.kshop.model.param.RegisterParam;
 import oxy.kshop.model.vo.UserVO;
+import oxy.kshop.service.IUserService;
 
 import java.util.*;
 
@@ -25,6 +26,8 @@ public class UserController {
     private final UserRepository userRepository;
 
     final private PasswordEncoder passwordEncoder;
+
+    private final IUserService userService;
 
     @GetMapping("/all")
     public List<UserDO> findAll() {
@@ -44,31 +47,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public UserVO register(@RequestBody UserDO userDO) {
-        Map<String, Object> queryMap = new HashMap<>();
-        // ignore user info check
-        log.debug("user = {}", userDO);
-        Date currentTime = new Date();
-        userDO.setCreateDate(currentTime);
-        userDO.setModifiedDate(currentTime);
-        userDO.setPassword(passwordEncoder.encode(userDO.getPassword()));
-        log.debug("user = {}", userDO);
-        userRepository.save(userDO);
-        log.info("saved new user {}", userDO);
-        userDO = userRepository.findUserByEmail(userDO.getEmail());
-        userDO.setPassword(null);
-        final UserVO userVO = new UserVO();
-        userVO.setId(userDO.getId());
-        userVO.setName(userDO.getName());
-        userVO.setToken("ahdiuwoq.adwhqod.dwqd");
-        userVO.setResources(new HashSet<String>(){{
-            addAll(Arrays.asList("ROLE_USER", "ROLE_ADMIN", "ROLE_SELLER"));}});
-        return userVO;
+    public UserVO register(@RequestBody @Validated RegisterParam param) {
+        return userService.register(param);
     }
 
     @Autowired
-    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder, IUserService userService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
 }

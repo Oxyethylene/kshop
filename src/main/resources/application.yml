@@ -11,7 +11,8 @@ mybatis:
 logging:
   level:
     oxy.kshop.controller: debug
-    oxy.kshop.mapper: info
+    oxy.kshop.service.impl: debug
+    oxy.kshop.mapper: debug
 
 security:
   jwt:

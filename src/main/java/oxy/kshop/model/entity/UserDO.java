@@ -5,8 +5,7 @@ import java.util.Date;
 /**
  * @author kudlife
  */
-public class UserDO {
-    private Long id;
+public class UserDO extends BaseDO{
     private String name;
     private String password;
     private String email;
@@ -16,20 +15,12 @@ public class UserDO {
     public UserDO(){}
 
     public UserDO(Long id, String name, String password, String email, Date createDate, Date modifiedDate) {
-        this.id = id;
+        setId(id);
         this.name = name;
         this.password = password;
         this.email = email;
         this.createDate = createDate;
         this.modifiedDate = modifiedDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -75,7 +66,7 @@ public class UserDO {
     @Override
     public String toString() {
         return "UserDO{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +

@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * 认证异常处理器
+ * 查询用户失败或校验密码失败时抛出的异常在此处理
+ */
 public class MyEntryPoint implements AuthenticationEntryPoint {
     Logger log = LoggerFactory.getLogger(MyEntryPoint.class);
 

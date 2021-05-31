@@ -21,6 +21,7 @@ import java.io.IOException;
 
 /**
  * 认证过滤器
+ * 从请求头获取jwt，解析后组装一个Authentication对象放入SpringSecurity上下文中，即可完成登陆验证
  *
  * @author kudlife
  */
@@ -36,6 +37,7 @@ public class LoginFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        log.info("------LoginFilter------");
         Claims claims = jwtUtil.parse(request.getHeader("Authorization"));
         if (claims != null) {
             // 从jwt中取出email
