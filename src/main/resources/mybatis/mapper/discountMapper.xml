@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oxy.kshop.mapper.DiscountRepository">
+    <resultMap type="oxy.kshop.model.entity.DiscountDO" id="DiscountResult">
+        <id property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="num" column="num"/>
+    </resultMap>
+
+    <select id="oxy.kshop.mapper.DiscountRepository.selectDiscountByProductId"
+            parameterType="java.lang.Long" resultMap="DiscountResult">
+        SELECT *
+        FROM kshop_discount
+        WHERE id = #{id}
+    </select>
+</mapper>

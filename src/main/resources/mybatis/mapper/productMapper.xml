@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oxy.kshop.mapper.ProductRepository">
+    <resultMap type="oxy.kshop.model.vo.ProductVO" id="ProductVOResult">
+        <id property="productId" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="sp" column="sp_data"/>
+    </resultMap>
+
+    <resultMap type="oxy.kshop.model.entity.ProductDO" id="ProductDOResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="discountId" column="discount_id"/>
+        <result property="description" column="description"/>
+        <result property="spData" column="sp_data"/>
+    </resultMap>
+
+    <select id="oxy.kshop.mapper.ProductRepository.selectAll"
+            resultMap="ProductVOResult">
+        SELECT *
+        FROM kshop_product
+    </select>
+
+    <select id="oxy.kshop.mapper.ProductRepository.findProductById"
+            parameterType="java.lang.Long" resultMap="ProductDOResult">
+        SELECT *
+        FROM kshop_product
+        WHERE id = #{id}
+    </select>
+</mapper>
