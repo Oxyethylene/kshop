@@ -11,4 +11,16 @@ public interface OrderRepository {
     List<OrderDO> selectCartByUserId(Long id, int page, int size);
 
     int selectCartSizeByUserId(Long id);
+
+    void save(OrderDO order);
+
+    OrderDO selectCartByOrderId(Long orderId);
+
+    OrderDO selectCartByUserIdAndSkuId(Long userId, Long skuId);
+
+    void updateOrderStatusByOrderId(Long orderId, int status);
+
+    void updateOrderCountByOrderId(Long orderId, int count);
+
+    void deleteCartByOrderId(Long orderId);
 }

@@ -27,4 +27,46 @@
         WHERE user_id = #{id}
           AND status = 0
     </select>
+
+    <insert id="oxy.kshop.mapper.OrderRepository.save"
+            parameterType="oxy.kshop.model.entity.OrderDO"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO kshop_order(user_id, sku_id, status, count)
+        VALUES (#{userId}, #{skuId}, #{status}, #{count})
+    </insert>
+
+    <select id="oxy.kshop.mapper.OrderRepository.selectCartByOrderId"
+            resultMap="OrderResult">
+        SELECT *
+        FROM kshop_order
+        WHERE id = #{orderId}
+          AND status = 0
+    </select>
+
+    <select id="oxy.kshop.mapper.OrderRepository.selectCartByUserIdAndSkuId"
+            resultMap="OrderResult">
+        SELECT *
+        FROM kshop_order
+        WHERE user_id = #{userId}
+          AND sku_id = #{skuId}
+          AND status = 0
+    </select>
+
+    <update id="oxy.kshop.mapper.OrderRepository.updateOrderStatusByOrderId">
+        UPDATE kshop_order
+        SET status = #{status}
+        WHERE id = #{orderId}
+    </update>
+
+    <update id="oxy.kshop.mapper.OrderRepository.updateOrderCountByOrderId">
+        UPDATE kshop_order
+        SET count = #{count}
+        WHERE id = #{orderId}
+    </update>
+
+    <delete id="oxy.kshop.mapper.OrderRepository.deleteCartByOrderId">
+        DELETE
+        FROM kshop_order
+        WHERE id = #{id}
+    </delete>
 </mapper>
