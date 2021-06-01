@@ -5,6 +5,7 @@ import oxy.kshop.model.entity.SkuDO;
 import oxy.kshop.model.vo.SkuVO;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface SkuRepository {
@@ -13,4 +14,6 @@ public interface SkuRepository {
     SkuVO selectSkuBySkuId(Long id);
 
     String selectProductNameBySkuId(Long id);
+
+    void updateSku(Map<String, Object> map);
 }

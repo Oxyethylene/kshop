@@ -69,4 +69,43 @@
         FROM kshop_order
         WHERE id = #{id}
     </delete>
+
+    <select id="oxy.kshop.mapper.OrderRepository.selectAllByUserId"
+            resultMap="OrderResult">
+        SELECT *
+        FROM kshop_order
+        WHERE user_id = #{userId}
+        LIMIT #{page}, #{size}
+    </select>
+
+    <select id="oxy.kshop.mapper.OrderRepository.selectAllByUserIdAndStatus"
+            resultMap="OrderResult">
+        SELECT *
+        FROM kshop_order
+        WHERE user_id = #{userId}
+          AND status = #{status}
+        LIMIT #{page}, #{size}
+    </select>
+
+    <select id="oxy.kshop.mapper.OrderRepository.selectOrderByOrderId"
+            resultMap="OrderResult">
+        SELECT *
+        FROM kshop_order
+        WHERE id = #{orderId}
+    </select>
+
+    <select id="oxy.kshop.mapper.OrderRepository.countOrderByUserId"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM kshop_order
+        WHERE user_id = #{id}
+    </select>
+
+    <select id="oxy.kshop.mapper.OrderRepository.countOrderByUserIdAndStatus"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM kshop_order
+        WHERE user_id = #{id}
+          AND status = #{status}
+    </select>
 </mapper>

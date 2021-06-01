@@ -23,4 +23,14 @@ public interface OrderRepository {
     void updateOrderCountByOrderId(Long orderId, int count);
 
     void deleteCartByOrderId(Long orderId);
+
+    List<OrderDO> selectAllByUserId(Long userId, int page, int size);
+
+    List<OrderDO> selectAllByUserIdAndStatus(Long userId, int status, int page, int size);
+
+    OrderDO selectOrderByOrderId(Long orderId);
+
+    int countOrderByUserId(Long id);
+
+    int countOrderByUserIdAndStatus(Long id, int status);
 }

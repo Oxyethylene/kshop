@@ -29,8 +29,29 @@
             resultType="java.lang.String" parameterType="java.lang.Long">
         SELECT DISTINCT p.name
         FROM kshop_product as p,
-            kshop_sku as s
+             kshop_sku as s
         WHERE p.id = s.product_id
     </select>
+
+    <update id="oxy.kshop.mapper.SkuRepository.updateSku"
+            parameterType="Map">
+        UPDATE kshop_sku
+        <set>
+            <if test="stock!=null">
+                stock = #{stock}
+            </if>
+            <if test="price!=null">
+                price = #{price}
+            </if>
+            <if test="type!=null">
+                type = #{type}
+            </if>
+            <if test="picture!=null">
+                picture = #{picture}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
 
 </mapper>
