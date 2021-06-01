@@ -2,6 +2,8 @@ package oxy.kshop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import oxy.kshop.exception.ApiException;
 import oxy.kshop.mapper.DiscountRepository;
 import oxy.kshop.mapper.ProductRepository;
 import oxy.kshop.mapper.SkuRepository;
@@ -16,6 +18,7 @@ import oxy.kshop.service.IProductService;
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ProductServiceImpl implements IProductService {
     @Autowired
     ProductRepository productRepository;
@@ -46,7 +49,10 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public ProductInfoVO getProductInfoById(Long id) {
         final ProductInfoVO productInfoVO = new ProductInfoVO();
-        final ProductDO product = productRepository.findProductById(id);
+        final ProductDO product = productRepository.selectProductById(id);
+        if (product == null) {
+            throw new ApiException("产品ID不存在");
+        }
         productInfoVO.setSp(product.getSpData());
         final List<SkuVO> skuVOS = skuRepository.selectAllSkuByProductId(id);
         productInfoVO.setSku(skuVOS);

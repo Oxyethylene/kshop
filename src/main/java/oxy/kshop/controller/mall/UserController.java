@@ -32,7 +32,6 @@ public class UserController {
     @GetMapping("/all")
     public List<UserDO> findAll() {
         return userRepository.findUserByMap(null);
-
     }
 
     @GetMapping("/test")

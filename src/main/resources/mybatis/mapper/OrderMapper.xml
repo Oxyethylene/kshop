@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oxy.kshop.mapper.OrderRepository">
+    <resultMap type="oxy.kshop.model.entity.OrderDO" id="OrderResult">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="SkuId" column="sku_id"/>
+        <result property="status" column="status"/>
+        <result property="count" column="count"/>
+    </resultMap>
+
+    <select id="oxy.kshop.mapper.OrderRepository.selectCartByUserId"
+            resultMap="OrderResult">
+        SELECT *
+        FROM kshop_order
+        WHERE user_id = #{id}
+          AND status = 0
+        LIMIT #{page}, #{size}
+    </select>
+
+    <select id="oxy.kshop.mapper.OrderRepository.selectCartSizeByUserId"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM kshop_order
+        WHERE user_id = #{id}
+          AND status = 0
+    </select>
+</mapper>

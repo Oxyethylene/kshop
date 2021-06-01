@@ -25,9 +25,16 @@
         LIMIT #{page}, #{size}
     </select>
 
-    <select id="oxy.kshop.mapper.ProductRepository.findProductById"
+    <select id="oxy.kshop.mapper.ProductRepository.selectProductById"
             parameterType="java.lang.Long" resultMap="ProductDOResult">
         SELECT *
+        FROM kshop_product
+        WHERE id = #{id}
+    </select>
+
+    <select id="oxy.kshop.mapper.ProductRepository.selectNameByProductId"
+            parameterType="java.lang.Long" resultType="java.lang.String">
+        SELECT name
         FROM kshop_product
         WHERE id = #{id}
     </select>

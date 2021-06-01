@@ -17,4 +17,20 @@
         FROM kshop_sku
         WHERE product_id = #{id}
     </select>
+
+    <select id="oxy.kshop.mapper.SkuRepository.selectSkuBySkuId"
+            parameterType="java.lang.Long" resultMap="SkuVOResult">
+        SELECT *
+        FROM kshop_sku
+        WHERE id = #{id}
+    </select>
+
+    <select id="oxy.kshop.mapper.SkuRepository.selectProductNameBySkuId"
+            resultType="java.lang.String" parameterType="java.lang.Long">
+        SELECT DISTINCT p.name
+        FROM kshop_product as p,
+            kshop_sku as s
+        WHERE p.id = s.product_id
+    </select>
+
 </mapper>

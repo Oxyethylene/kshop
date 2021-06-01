@@ -9,9 +9,11 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository {
-    public List<ProductVO> selectAll(int page, int size);
+    List<ProductVO> selectAll(int page, int size);
 
-    public ProductDO findProductById(Long id);
+    ProductDO selectProductById(Long id);
 
-    public int count();
+    String selectNameByProductId(Long id);
+
+    int count();
 }

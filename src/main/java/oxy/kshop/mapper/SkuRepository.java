@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface SkuRepository {
     List<SkuVO> selectAllSkuByProductId(Long id);
+
+    SkuVO selectSkuBySkuId(Long id);
+
+    String selectProductNameBySkuId(Long id);
 }
