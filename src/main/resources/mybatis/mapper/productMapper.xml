@@ -22,6 +22,7 @@
             resultMap="ProductVOResult">
         SELECT *
         FROM kshop_product
+        LIMIT #{page}, #{size}
     </select>
 
     <select id="oxy.kshop.mapper.ProductRepository.findProductById"
@@ -29,5 +30,11 @@
         SELECT *
         FROM kshop_product
         WHERE id = #{id}
+    </select>
+
+    <select id="oxy.kshop.mapper.ProductRepository.count"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM kshop_product
     </select>
 </mapper>

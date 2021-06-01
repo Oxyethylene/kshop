@@ -7,6 +7,7 @@ import oxy.kshop.mapper.ProductRepository;
 import oxy.kshop.mapper.SkuRepository;
 import oxy.kshop.model.entity.DiscountDO;
 import oxy.kshop.model.entity.ProductDO;
+import oxy.kshop.model.result.PageResult;
 import oxy.kshop.model.vo.ProductInfoVO;
 import oxy.kshop.model.vo.ProductVO;
 import oxy.kshop.model.vo.SkuVO;
@@ -26,9 +27,15 @@ public class ProductServiceImpl implements IProductService {
     DiscountRepository discountRepository;
 
     @Override
-    public List<ProductVO> getProductList() {
-        final List<ProductVO> productVOList = productRepository.selectAll();
-        return productVOList;
+    public PageResult<ProductVO> getProductList(int page, int size) {
+        final PageResult<ProductVO> result = new PageResult<>();
+        final List<ProductVO> productVOS = productRepository.selectAll((page - 1) * size, size);
+        result.setData(productVOS);
+        result.setPage(page);
+        result.setSize(size);
+        result.setTotal(productRepository.count());
+
+        return result;
     }
 
     @Override
